@@ -3,6 +3,7 @@
 FROM centos:7
 MAINTAINER konavara@gmail.com
 RUN yum -y update
+RUN yum -y install httpd php php-gd php-mysql
 ADD config /opt
 RUN yum -y install `cat /opt/packages`
 RUN yum -y install `cat /opt/myapppackages`

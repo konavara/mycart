@@ -1,50 +1,35 @@
 ---
 version: "3.7"
 services:
-  myapp-frontend:
+  mycart-frontend:
     build:
       context: ./frontend
-    image: konavara/myapp-frontend:1.0
+    image: konavara/mycart-frontend:3.0
     depends_on: 
-      - myapp-backend
+      - mycart-backend
     environment:
-      BACKENDLB: myapp-backend
+      BACKENDLB: mycart-backend
     ports:
       - "9000:80"
     volumes:
       - type: volume
-        source: myapp-frontend-logvol
+        source: mycart-frontend-logvol
         target: /var/log
-  myapp-frontend-logs:
-    build:
-      context: ./awslogs
-    image: konavara/myapp-frontend-logs:1.0
-    depends_on: 
-      - myapp-frontend
+  mycart-db:
+    image: mysql:5.7
     volumes:
       - type: volume
-        source: myapp-frontend-logvol
-        target: /mnt/log
-        read_only: true
-  myapp-backend:
+        source: mycart-db-vol
+        target: /var/lib/mysql
+  mycart-backend:
     build:
       context: ./backend
-    image: konavara/myapp-backend:1.0
+    image: konavara/mycart-backend:3.0
     volumes:
       - type: volume
-        source: myapp-backend-logvol
+        source: mycart-backend-logvol
         target: /var/log
-  myapp-backend-logs:
-    build:
-      context: ./awslogs
-    image: konavara/myapp-backend-logs:1.0
-    depends_on: 
-      - myapp-backend
-    volumes:
-      - type: volume
-        source: myapp-backend-logvol
-        target: /mnt/log
-        read_only: true
 volumes:
-  myapp-frontend-logvol:
-  myapp-backend-logvol:
+  mycart-frontend-logvol:
+  mycart-backend-logvol:
+  mycart-db-vol:
