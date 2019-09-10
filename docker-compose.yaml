@@ -4,7 +4,7 @@ services:
   mycart-frontend:
     build:
       context: ./frontend
-    image: konavara/mycart-frontend:3.0
+    image: konavara/mycart-frontend:4.0
     depends_on: 
       - mycart-backend
     environment:
@@ -24,7 +24,7 @@ services:
   mycart-backend:
     build:
       context: ./backend
-    image: konavara/mycart-backend:3.0
+    image: konavara/mycart-backend:4.0
     volumes:
       - type: volume
         source: mycart-backend-logvol
