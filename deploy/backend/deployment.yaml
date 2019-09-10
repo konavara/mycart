@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: mycart-backend-container
-        image: konavara/mycart-backend:4.0
+        image: BUILDTAG
         imagePullPolicy: Always
         ports:
         - containerPort: 80
